@@ -100,7 +100,6 @@ h3 span#score {
   z-index: 1;
   transition: background 0.2s, transform 0.1s;
   box-shadow: 3px 3px 0 var(--darkest-brown);
-  margin-bottom: 20px;
 }
 
 #start-button:hover {
@@ -125,17 +124,18 @@ h3 span#score {
 
 /* Main grid */
 .grid {
-  width: 200px;
-  height: 400px;
+  width: 202px;
+  height: 402px;
   display: flex;
   flex-wrap: wrap;
   background-color: var(--darkest-brown);
   border: 2px solid var(--deep-brown);
   box-shadow:
     0 0 0 1px var(--dark-sienna),
-    6px 6px 0 var(--darkest-brown),
+    6px 6px 0 var(--deep-brown),
     inset 0 0 30px rgba(52,33,27,0.5);
   position: relative;
+  overflow: hidden;
 }
 
 /* Subtle grid lines */
@@ -146,8 +146,7 @@ h3 span#score {
 }
 
 .taken {
-  background-color: var(--dark-sienna) !important;
-  border-color: rgba(52,33,27,0.4) !important;
+  border-color: rgba(52,33,27,0.5);
 }
 
 .tetromino {

@@ -95,7 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function freeze() {
     if(current.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
-      current.forEach(index => squares[currentPosition + index].classList.add('taken'))
+      current.forEach(index => {
+        const cell = squares[currentPosition + index]
+        cell.classList.add('taken')
+        // preserve the piece color on lock — store it as a data attribute
+        // and re-apply so CSS .taken background doesn't wipe it
+        cell.dataset.color = colors[random]
+        cell.style.backgroundColor = colors[random]
+      })
       random = nextRandom
       nextRandom = Math.floor(Math.random() * theTetrominoes.length)
       current = theTetrominoes[random][currentRotation]
@@ -207,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[index].classList.remove('taken')
           squares[index].classList.remove('tetromino')
           squares[index].style.backgroundColor = ''
+          delete squares[index].dataset.color
         })
         const squaresRemoved = squares.splice(i, width)
         squares = squaresRemoved.concat(squares)
