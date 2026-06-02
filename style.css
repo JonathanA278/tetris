@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --deep-brown:    #573D31;
+  --warm-taupe:    #8B7469;
+  --peach:         #F6D4BA;
+  --dusty-clay:    #A4806B;
+  --mid-brown:     #866754;
+  --darkest-brown: #34211B;
+  --salmon:        #D09A80;
+  --off-white:     #FCFCF9;
+  --dark-sienna:   #5A3E30;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--darkest-brown);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(87,61,49,0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(90,62,48,0.4) 0%, transparent 50%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  color: var(--off-white);
+  padding: 24px;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 150px;
+}
+
+/* Title */
+h1.game-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--peach);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  text-shadow: 2px 3px 0 var(--darkest-brown);
+  position: relative;
+  z-index: 1;
+}
+
+/* Score row */
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-taupe);
+}
+
+h3 span#score {
+  color: var(--peach);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
+/* Start button */
+#start-button {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--darkest-brown);
+  background: var(--dusty-clay);
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 3px 3px 0 var(--darkest-brown);
+  margin-bottom: 20px;
+}
+
+#start-button:hover {
+  background: var(--salmon);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--darkest-brown);
+}
+
+#start-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--darkest-brown);
+}
+
+/* Container */
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Main grid */
+.grid {
+  width: 200px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--darkest-brown);
+  border: 2px solid var(--deep-brown);
+  box-shadow:
+    0 0 0 1px var(--dark-sienna),
+    6px 6px 0 var(--darkest-brown),
+    inset 0 0 30px rgba(52,33,27,0.5);
+  position: relative;
+}
+
+/* Subtle grid lines */
+.grid div {
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgba(87,61,49,0.18);
+}
+
+.taken {
+  background-color: var(--dark-sienna) !important;
+  border-color: rgba(52,33,27,0.4) !important;
+}
+
+.tetromino {
+  border-color: rgba(252,252,249,0.15) !important;
+  position: relative;
+}
+
+/* Side panel */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--warm-taupe);
+  margin-bottom: 6px;
+}
+
+/* Mini grid */
+.mini-grid {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--darkest-brown);
+  border: 2px solid var(--deep-brown);
+  box-shadow:
+    0 0 0 1px var(--dark-sienna),
+    4px 4px 0 var(--darkest-brown);
+}
+
+.mini-grid div {
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgba(87,61,49,0.18);
+}
+
+/* Decorative corner marks on grid */
+.grid::before,
+.grid::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--dusty-clay);
+  border-style: solid;
+  z-index: 2;
+}
+.grid::before {
+  top: -4px; left: -4px;
+  border-width: 2px 0 0 2px;
+}
+.grid::after {
+  bottom: -4px; right: -4px;
+  border-width: 0 2px 2px 0;
+}
